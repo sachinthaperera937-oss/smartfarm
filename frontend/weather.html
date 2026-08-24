@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartFarm | Weather</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/weather.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-icon">🌱</span>
+            <span>SmartFarm</span>
+        </div>
+
+        <nav class="navigation">
+
+            <a href="dashboard.html" class="nav-item">
+                <span>▦</span>
+                Dashboard
+            </a>
+
+            <a href="farms.html" class="nav-item">
+                <span>⌂</span>
+                Farms
+            </a>
+
+            <a href="crops.html" class="nav-item">
+                <span>🌾</span>
+                Crops
+            </a>
+
+            <a href="weather.html" class="nav-item active">
+                <span>☀</span>
+                Weather
+            </a>
+
+            <a href="recommendations.html" class="nav-item">
+                <span>✦</span>
+                AI Insights
+            </a>
+
+            <a href="reports.html" class="nav-item">
+                <span>▤</span>
+                Reports
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="settings.html" class="nav-item">
+                <span>⚙</span>
+                Settings
+            </a>
+
+            <a href="login.html" class="nav-item">
+                <span>↪</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+        <header class="topbar">
+
+            <div>
+                <h1>Weather</h1>
+
+                <p>
+                    Monitor real-time weather conditions affecting your farms.
+                </p>
+            </div>
+
+
+            <div class="user-area">
+
+                <button class="notification">
+                    🔔
+                </button>
+
+
+                <div class="user">
+
+                    <div class="avatar">
+                        F
+                    </div>
+
+                    <div>
+                        <strong>Farmer</strong>
+                        <small>Farm Manager</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- WEATHER LOCATION -->
+        <section class="weather-location">
+
+            <div>
+
+                <span class="location-label">
+                    Weather Location
+                </span>
+
+                <h2 id="locationName">
+                    Loading location...
+                </h2>
+
+            </div>
+
+
+            <select id="locationSelect">
+
+                <option value="colombo">
+                    Colombo
+                </option>
+
+                <option value="gampaha">
+                    Gampaha
+                </option>
+
+                <option value="kandy">
+                    Kandy
+                </option>
+
+            </select>
+
+        </section>
+
+
+        <!-- CURRENT WEATHER -->
+        <section class="current-weather">
+
+            <div class="current-main">
+
+
+                <div
+                    class="weather-icon"
+                    id="weatherIcon"
+                >
+                    ⏳
+                </div>
+
+
+                <div>
+
+                    <span
+                        class="weather-status"
+                        id="weatherStatus"
+                    >
+                        Loading weather...
+                    </span>
+
+
+                    <div class="temperature">
+
+                        <span id="temperature">
+                            --
+                        </span>
+
+                        °
+
+                    </div>
+
+
+                    <p>
+
+                        Feels like
+
+                        <strong id="feelsLike">
+                            --
+                        </strong>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="weather-date">
+
+                <span>
+                    Today
+                </span>
+
+
+                <strong id="currentDate">
+                    Loading...
+                </strong>
+
+
+                <small id="lastUpdated">
+                    Updating weather...
+                </small>
+
+            </div>
+
+        </section>
+
+
+        <!-- WEATHER STATS -->
+        <section class="weather-stats">
+
+
+            <!-- HUMIDITY -->
+            <div class="weather-stat">
+
+                <div class="stat-icon">
+                    💧
+                </div>
+
+                <div>
+
+                    <span>
+                        Humidity
+                    </span>
+
+                    <strong id="humidity">
+                        --
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- WIND SPEED -->
+            <div class="weather-stat">
+
+                <div class="stat-icon">
+                    💨
+                </div>
+
+                <div>
+
+                    <span>
+                        Wind Speed
+                    </span>
+
+                    <strong id="wind">
+                        --
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- RAINFALL -->
+            <div class="weather-stat">
+
+                <div class="stat-icon">
+                    🌧️
+                </div>
+
+                <div>
+
+                    <span>
+                        Rainfall
+                    </span>
+
+                    <strong id="rainfall">
+                        --
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- UV INDEX -->
+            <div class="weather-stat">
+
+                <div class="stat-icon">
+                    ☀️
+                </div>
+
+                <div>
+
+                    <span>
+                        UV Index
+                    </span>
+
+                    <strong id="uv">
+                        --
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 5 DAY FORECAST -->
+        <section class="forecast-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        5-Day Forecast
+                    </h2>
+
+                    <p>
+                        Expected weather conditions
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- JavaScript will insert forecast cards here -->
+            <div
+                class="forecast-grid"
+                id="forecastGrid"
+            >
+
+                <p class="loading-message">
+                    Loading forecast...
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- WEATHER ALERT -->
+        <section class="weather-alert">
+
+            <div class="alert-icon">
+                ⚠️
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Weather-based Farming Alert
+                </strong>
+
+                <p id="weatherAlert">
+
+                    Loading weather recommendations...
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- FARM CONDITIONS -->
+        <section class="farm-weather-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Farm Conditions
+                    </h2>
+
+                    <p>
+                        Real-time weather impact across your farms
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- JavaScript can dynamically add farm weather cards -->
+            <div
+                class="farm-condition-grid"
+                id="farmConditionGrid"
+            >
+
+                <p class="loading-message">
+                    Loading farm conditions...
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- WEATHER JAVASCRIPT -->
+<script src="js/weather.js"></script>
+
+</body>
+</html>

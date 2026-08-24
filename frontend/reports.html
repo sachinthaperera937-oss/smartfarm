@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartFarm | Reports</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reports.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-icon">🌱</span>
+            <span>SmartFarm</span>
+        </div>
+
+        <nav class="navigation">
+
+            <a href="dashboard.html" class="nav-item">
+                <span>▦</span>
+                Dashboard
+            </a>
+
+            <a href="farms.html" class="nav-item">
+                <span>⌂</span>
+                Farms
+            </a>
+
+            <a href="crops.html" class="nav-item">
+                <span>🌾</span>
+                Crops
+            </a>
+
+            <a href="weather.html" class="nav-item">
+                <span>☀</span>
+                Weather
+            </a>
+
+            <a href="recommendations.html" class="nav-item">
+                <span>✦</span>
+                AI Insights
+            </a>
+
+            <a href="reports.html" class="nav-item active">
+                <span>▤</span>
+                Reports
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="settings.html" class="nav-item">
+                <span>⚙</span>
+                Settings
+            </a>
+
+            <a href="login.html" class="nav-item">
+                <span>↪</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div>
+                <h1>Reports</h1>
+
+                <p>
+                    Review your farm performance and production data.
+                </p>
+            </div>
+
+            <div class="user-area">
+
+                <button class="notification">
+                    🔔
+                </button>
+
+                <div class="user">
+
+                    <div class="avatar">
+                        F
+                    </div>
+
+                    <div>
+                        <strong>Farmer</strong>
+                        <small>Farm Manager</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- REPORT CONTROLS -->
+
+        <section class="report-controls">
+
+            <div>
+
+                <span>Report Period</span>
+
+                <select id="periodSelect">
+
+                    <option value="month">
+                        This Month
+                    </option>
+
+                    <option value="quarter">
+                        This Quarter
+                    </option>
+
+                    <option value="year">
+                        This Year
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <span>Farm</span>
+
+                <select id="farmSelect">
+
+                    <option value="all">
+                        All Farms
+                    </option>
+
+                    <option value="green-valley">
+                        Green Valley Farm
+                    </option>
+
+                    <option value="sunrise">
+                        Sunrise Farm
+                    </option>
+
+                    <option value="green-hills">
+                        Green Hills
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                class="export-button"
+                id="exportButton"
+            >
+                ↓ Export Report
+            </button>
+
+        </section>
+
+
+        <!-- SUMMARY -->
+
+        <section class="report-summary">
+
+            <div class="report-stat">
+
+                <div class="report-stat-icon">
+                    🚜
+                </div>
+
+                <span>Total Farms</span>
+
+                <strong id="farmCount">
+                    3
+                </strong>
+
+            </div>
+
+
+            <div class="report-stat">
+
+                <div class="report-stat-icon">
+                    🌾
+                </div>
+
+                <span>Active Crops</span>
+
+                <strong id="cropCount">
+                    8
+                </strong>
+
+            </div>
+
+
+            <div class="report-stat">
+
+                <div class="report-stat-icon">
+                    📦
+                </div>
+
+                <span>Estimated Harvest</span>
+
+                <strong>
+                    2.8 T
+                </strong>
+
+            </div>
+
+
+            <div class="report-stat">
+
+                <div class="report-stat-icon">
+                    📈
+                </div>
+
+                <span>Farm Efficiency</span>
+
+                <strong>
+                    84%
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- PERFORMANCE -->
+
+        <section class="report-grid">
+
+
+            <!-- CROP PERFORMANCE -->
+
+            <div class="report-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>Crop Performance</h2>
+                        <p>Current crop progress</p>
+                    </div>
+
+                    <span class="panel-period">
+                        This month
+                    </span>
+
+                </div>
+
+
+                <div class="crop-performance">
+
+
+                    <div class="crop-row">
+
+                        <div class="crop-name">
+
+                            <span class="crop-emoji">
+                                🍅
+                            </span>
+
+                            <div>
+                                <strong>Tomato</strong>
+                                <small>Green Valley Farm</small>
+                            </div>
+
+                        </div>
+
+                        <div class="progress-area">
+
+                            <div class="progress-info">
+                                <span>78%</span>
+                            </div>
+
+                            <div class="progress-bar">
+                                <div
+                                    class="progress tomato"
+                                    style="width: 78%"
+                                ></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="crop-row">
+
+                        <div class="crop-name">
+
+                            <span class="crop-emoji">
+                                🌽
+                            </span>
+
+                            <div>
+                                <strong>Corn</strong>
+                                <small>Green Valley Farm</small>
+                            </div>
+
+                        </div>
+
+                        <div class="progress-area">
+
+                            <div class="progress-info">
+                                <span>64%</span>
+                            </div>
+
+                            <div class="progress-bar">
+                                <div
+                                    class="progress corn"
+                                    style="width: 64%"
+                                ></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="crop-row">
+
+                        <div class="crop-name">
+
+                            <span class="crop-emoji">
+                                🌾
+                            </span>
+
+                            <div>
+                                <strong>Rice</strong>
+                                <small>Sunrise Farm</small>
+                            </div>
+
+                        </div>
+
+                        <div class="progress-area">
+
+                            <div class="progress-info">
+                                <span>48%</span>
+                            </div>
+
+                            <div class="progress-bar">
+                                <div
+                                    class="progress rice"
+                                    style="width: 48%"
+                                ></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="crop-row">
+
+                        <div class="crop-name">
+
+                            <span class="crop-emoji">
+                                🥕
+                            </span>
+
+                            <div>
+                                <strong>Carrot</strong>
+                                <small>Green Hills</small>
+                            </div>
+
+                        </div>
+
+                        <div class="progress-area">
+
+                            <div class="progress-info">
+                                <span>88%</span>
+                            </div>
+
+                            <div class="progress-bar">
+                                <div
+                                    class="progress carrot"
+                                    style="width: 88%"
+                                ></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FARM PERFORMANCE -->
+
+            <div class="report-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>Farm Performance</h2>
+                        <p>Efficiency overview</p>
+                    </div>
+
+                </div>
+
+
+                <div class="farm-performance">
+
+                    <div class="farm-performance-row">
+
+                        <div class="farm-info">
+
+                            <strong>
+                                Green Valley Farm
+                            </strong>
+
+                            <small>
+                                45 acres
+                            </small>
+
+                        </div>
+
+                        <div class="efficiency">
+                            <strong>91%</strong>
+                            <small>Excellent</small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="farm-performance-row">
+
+                        <div class="farm-info">
+
+                            <strong>
+                                Sunrise Farm
+                            </strong>
+
+                            <small>
+                                32 acres
+                            </small>
+
+                        </div>
+
+                        <div class="efficiency">
+                            <strong>78%</strong>
+                            <small>Good</small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="farm-performance-row">
+
+                        <div class="farm-info">
+
+                            <strong>
+                                Green Hills
+                            </strong>
+
+                            <small>
+                                28 acres
+                            </small>
+
+                        </div>
+
+                        <div class="efficiency">
+                            <strong>83%</strong>
+                            <small>Good</small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- HARVEST TABLE -->
+
+        <section class="report-panel harvest-panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>Harvest Overview</h2>
+                    <p>Estimated production for active crops</p>
+                </div>
+
+                <span class="panel-period">
+                    2026
+                </span>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Crop</th>
+                            <th>Farm</th>
+                            <th>Area</th>
+                            <th>Growth</th>
+                            <th>Estimated Yield</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                <strong>Tomato</strong>
+                            </td>
+
+                            <td>
+                                Green Valley Farm
+                            </td>
+
+                            <td>
+                                8 acres
+                            </td>
+
+                            <td>
+                                78%
+                            </td>
+
+                            <td>
+                                820 kg
+                            </td>
+
+                            <td>
+                                <span class="status good">
+                                    On Track
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>Corn</strong>
+                            </td>
+
+                            <td>
+                                Green Valley Farm
+                            </td>
+
+                            <td>
+                                12 acres
+                            </td>
+
+                            <td>
+                                64%
+                            </td>
+
+                            <td>
+                                1.1 T
+                            </td>
+
+                            <td>
+                                <span class="status good">
+                                    On Track
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>Rice</strong>
+                            </td>
+
+                            <td>
+                                Sunrise Farm
+                            </td>
+
+                            <td>
+                                15 acres
+                            </td>
+
+                            <td>
+                                48%
+                            </td>
+
+                            <td>
+                                720 kg
+                            </td>
+
+                            <td>
+                                <span class="status warning">
+                                    Monitor
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>Carrot</strong>
+                            </td>
+
+                            <td>
+                                Green Hills
+                            </td>
+
+                            <td>
+                                6 acres
+                            </td>
+
+                            <td>
+                                88%
+                            </td>
+
+                            <td>
+                                430 kg
+                            </td>
+
+                            <td>
+                                <span class="status good">
+                                    Near Harvest
+                                </span>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- INSIGHTS -->
+
+        <section class="report-insight">
+
+            <div class="insight-icon">
+                ✦
+            </div>
+
+            <div>
+
+                <span>
+                    REPORT INSIGHT
+                </span>
+
+                <h2>
+                    Farm efficiency increased by 8% this month
+                </h2>
+
+                <p>
+                    Irrigation optimization and weather-based
+                    recommendations have contributed to improved
+                    resource usage across your farms.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="js/reports.js"></script>
+
+</body>
+</html>

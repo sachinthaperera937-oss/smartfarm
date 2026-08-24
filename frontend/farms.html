@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SmartFarm | Farms</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/farms.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ========================================
+         SIDEBAR
+    ======================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-icon">🌱</span>
+            <span>SmartFarm</span>
+        </div>
+
+
+        <nav class="navigation">
+
+            <a href="dashboard.html" class="nav-item">
+                <span>▦</span>
+                Dashboard
+            </a>
+
+            <a href="farms.html" class="nav-item active">
+                <span>⌂</span>
+                Farms
+            </a>
+
+            <a href="crops.html" class="nav-item">
+                <span>🌾</span>
+                Crops
+            </a>
+
+            <a href="weather.html" class="nav-item">
+                <span>☀</span>
+                Weather
+            </a>
+
+            <a href="recommendations.html" class="nav-item">
+                <span>✦</span>
+                AI Insights
+            </a>
+
+            <a href="reports.html" class="nav-item">
+                <span>▤</span>
+                Reports
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="settings.html" class="nav-item">
+                <span>⚙</span>
+                Settings
+            </a>
+
+            <a
+                href="login.html"
+                class="nav-item logout"
+                id="logoutButton"
+            >
+                <span>↪</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ========================================
+         MAIN CONTENT
+    ======================================== -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>My Farms</h1>
+
+                <p>
+                    Manage and monitor all your registered farms.
+                </p>
+
+            </div>
+
+
+            <div class="user-area">
+
+                <button class="notification">
+                    🔔
+                </button>
+
+
+                <div class="user">
+
+                    <div class="avatar" id="userAvatar">
+                        F
+                    </div>
+
+
+                    <div>
+
+                        <strong id="userName">
+                            Farmer
+                        </strong>
+
+                        <small>
+                            Farm Manager
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ========================================
+             ACTION BAR
+        ======================================== -->
+
+        <section class="farm-actions">
+
+
+            <!-- SEARCH -->
+
+            <div class="search-box">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    id="farmSearch"
+                    placeholder="Search farms..."
+                >
+
+            </div>
+
+
+            <!-- ADD FARM BUTTON -->
+
+            <button
+                class="add-farm-button"
+                id="addFarmButton"
+            >
+                + Add New Farm
+            </button>
+
+        </section>
+
+
+        <!-- ========================================
+             FARM SUMMARY
+        ======================================== -->
+
+        <section class="farm-summary">
+
+
+            <!-- TOTAL FARMS -->
+
+            <div class="summary-card">
+
+                <span class="summary-icon">
+                    🌱
+                </span>
+
+
+                <div>
+
+                    <span>
+                        Total Farms
+                    </span>
+
+                    <strong id="totalFarms">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL AREA -->
+
+            <div class="summary-card">
+
+                <span class="summary-icon">
+                    📐
+                </span>
+
+
+                <div>
+
+                    <span>
+                        Total Area
+                    </span>
+
+                    <strong id="totalArea">
+                        0 acres
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIVE CROPS -->
+
+            <div class="summary-card">
+
+                <span class="summary-icon">
+                    🌾
+                </span>
+
+
+                <div>
+
+                    <span>
+                        Active Crops
+                    </span>
+
+                    <strong id="activeCrops">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- NEEDS ATTENTION -->
+
+            <div class="summary-card">
+
+                <span class="summary-icon">
+                    ⚠
+                </span>
+
+
+                <div>
+
+                    <span>
+                        Needs Attention
+                    </span>
+
+                    <strong id="needsAttention">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             FARM CARDS
+
+             JavaScript will load farms here.
+        ======================================== -->
+
+        <section
+            class="farms-grid"
+            id="farmsGrid"
+        >
+
+            <p class="loading-message">
+                Loading farms...
+            </p>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- ========================================
+     ADD / EDIT FARM MODAL
+======================================== -->
+
+<div
+    class="modal-overlay"
+    id="farmModal"
+>
+
+
+    <div class="farm-modal">
+
+
+        <!-- MODAL HEADER -->
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2 id="modalTitle">
+                    Add New Farm
+                </h2>
+
+                <p>
+                    Enter the details of your farm.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="close-modal"
+                id="closeModal"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- FARM FORM -->
+
+        <form id="farmForm">
+
+
+            <!-- HIDDEN ID FOR EDITING -->
+
+            <input
+                type="hidden"
+                id="farmId"
+            >
+
+
+<!-- NAME + LOCATION -->
+<div class="form-row">
+    <div class="form-group">
+        <label for="farmName">Farm Name</label>
+        <input type="text" id="farmName" placeholder="e.g. Green Valley Farm" required>
+    </div>
+
+    <div class="form-group">
+        <label for="farmLocation">Location</label>
+        <input type="text" id="farmLocation" placeholder="e.g. Colombo" required>
+    </div>
+</div>
+
+<!-- COORDINATES -->
+<div class="form-row">
+    <div class="form-group">
+        <label for="farmLatitude">Latitude</label>
+        <input
+            type="number"
+            id="farmLatitude"
+            placeholder="e.g. 6.9271"
+            step="0.0001"
+            min="-90"
+            max="90"
+            required
+        >
+    </div>
+
+    <div class="form-group">
+        <label for="farmLongitude">Longitude</label>
+        <input
+            type="number"
+            id="farmLongitude"
+            placeholder="e.g. 79.8612"
+            step="0.0001"
+            min="-180"
+            max="180"
+            required
+        >
+    </div>
+</div>
+
+<button type="button" id="useCurrentLocationBtn" class="cancel-button" style="margin-bottom: 16px;">
+    📍 Use My Current Location
+</button>
+
+
+            <!-- AREA + SOIL TYPE -->
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label for="farmArea">
+                        Area (acres)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="farmArea"
+                        placeholder="e.g. 5"
+                        min="0"
+                        step="0.1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="soilType">
+                        Soil Type
+                    </label>
+
+                    <select
+                        id="soilType"
+                        required
+                    >
+
+                        <option value="">
+                            Select soil type
+                        </option>
+
+                        <option value="Loamy">
+                            Loamy
+                        </option>
+
+                        <option value="Clay">
+                            Clay
+                        </option>
+
+                        <option value="Sandy">
+                            Sandy
+                        </option>
+
+                        <option value="Sandy Loam">
+                            Sandy Loam
+                        </option>
+
+                        <option value="Silty">
+                            Silty
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRIMARY CROP -->
+
+            <div class="form-group">
+
+                <label for="primaryCrop">
+                    Primary Crop
+                </label>
+
+                <select id="primaryCrop">
+
+                    <option value="">
+                        Select crop (optional)
+                    </option>
+
+                    <option value="Tomato">
+                        Tomato
+                    </option>
+
+                    <option value="Rice">
+                        Rice
+                    </option>
+
+                    <option value="Potato">
+                        Potato
+                    </option>
+
+                    <option value="Carrot">
+                        Carrot
+                    </option>
+
+                    <option value="Corn">
+                        Corn
+                    </option>
+
+                    <option value="Vegetables">
+                        Vegetables
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- FORM ACTIONS -->
+
+            <div class="modal-actions">
+
+
+                <button
+                    type="button"
+                    class="cancel-button"
+                    id="cancelModal"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="save-button"
+                    id="saveFarmButton"
+                >
+                    Save Farm
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================
+     FARMS JAVASCRIPT
+======================================== -->
+
+<script src="js/farms.js"></script>
+
+</body>
+
+</html>

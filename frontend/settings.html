@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartFarm | Settings</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/settings.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-icon">🌱</span>
+            <span>SmartFarm</span>
+        </div>
+
+        <nav class="navigation">
+
+            <a href="dashboard.html" class="nav-item">
+                <span>▦</span>
+                Dashboard
+            </a>
+
+            <a href="farms.html" class="nav-item">
+                <span>⌂</span>
+                Farms
+            </a>
+
+            <a href="crops.html" class="nav-item">
+                <span>🌾</span>
+                Crops
+            </a>
+
+            <a href="weather.html" class="nav-item">
+                <span>☀</span>
+                Weather
+            </a>
+
+            <a href="recommendations.html" class="nav-item">
+                <span>✦</span>
+                AI Insights
+            </a>
+
+            <a href="reports.html" class="nav-item">
+                <span>▤</span>
+                Reports
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="settings.html" class="nav-item active">
+                <span>⚙</span>
+                Settings
+            </a>
+
+            <a href="login.html" class="nav-item">
+                <span>↪</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div>
+                <h1>Settings</h1>
+
+                <p>
+                    Manage your account and SmartFarm preferences.
+                </p>
+            </div>
+
+            <div class="user-area">
+
+                <button class="notification">
+                    🔔
+                </button>
+
+                <div class="user">
+
+                    <div class="avatar">
+                        F
+                    </div>
+
+                    <div>
+                        <strong>Farmer</strong>
+                        <small>Farm Manager</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- SETTINGS LAYOUT -->
+
+        <section class="settings-layout">
+
+            <!-- SETTINGS NAVIGATION -->
+
+            <aside class="settings-menu">
+
+                <button
+                    class="settings-tab active"
+                    data-section="profile"
+                >
+                    👤
+                    <span>
+                        <strong>Profile</strong>
+                        <small>Personal information</small>
+                    </span>
+                </button>
+
+
+                <button
+                    class="settings-tab"
+                    data-section="notifications"
+                >
+                    🔔
+                    <span>
+                        <strong>Notifications</strong>
+                        <small>Alerts and reminders</small>
+                    </span>
+                </button>
+
+
+                <button
+                    class="settings-tab"
+                    data-section="preferences"
+                >
+                    ⚙
+                    <span>
+                        <strong>Preferences</strong>
+                        <small>Application settings</small>
+                    </span>
+                </button>
+
+
+                <button
+                    class="settings-tab"
+                    data-section="security"
+                >
+                    🔒
+                    <span>
+                        <strong>Security</strong>
+                        <small>Password and account</small>
+                    </span>
+                </button>
+
+            </aside>
+
+
+            <!-- SETTINGS CONTENT -->
+
+            <div class="settings-content">
+
+
+                <!-- PROFILE -->
+
+                <section
+                    class="settings-section active"
+                    id="profile"
+                >
+
+                    <div class="settings-heading">
+
+                        <h2>Profile Information</h2>
+
+                        <p>
+                            Update your personal information.
+                        </p>
+
+                    </div>
+
+
+                    <div class="profile-header">
+
+                        <div class="large-avatar">
+                            F
+                        </div>
+
+                        <div>
+
+                            <h3>Farmer</h3>
+
+                            <p>
+                                Farm Manager
+                            </p>
+
+                            <button class="change-photo">
+                                Change Photo
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <form id="profileForm">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label>
+                                    Full Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="fullName"
+                                    value="Farmer"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Email Address
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    value="farmer@example.com"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Phone Number
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    placeholder="+1 000 000 0000"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Location
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="location"
+                                    placeholder="Your farm location"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-actions">
+
+                            <button
+                                type="button"
+                                class="cancel-button"
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                type="submit"
+                                class="save-button"
+                            >
+                                Save Changes
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </section>
+
+
+                <!-- NOTIFICATIONS -->
+
+                <section
+                    class="settings-section"
+                    id="notifications"
+                >
+
+                    <div class="settings-heading">
+
+                        <h2>Notifications</h2>
+
+                        <p>
+                            Choose which alerts SmartFarm sends you.
+                        </p>
+
+                    </div>
+
+
+                    <div class="setting-option">
+
+                        <div>
+                            <strong>
+                                Weather Alerts
+                            </strong>
+
+                            <p>
+                                Receive notifications about
+                                important weather changes.
+                            </p>
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                checked
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="setting-option">
+
+                        <div>
+                            <strong>
+                                Crop Alerts
+                            </strong>
+
+                            <p>
+                                Get notified about crop health
+                                and growth problems.
+                            </p>
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                checked
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="setting-option">
+
+                        <div>
+                            <strong>
+                                AI Recommendations
+                            </strong>
+
+                            <p>
+                                Receive new SmartFarm recommendations.
+                            </p>
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                checked
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="setting-option">
+
+                        <div>
+                            <strong>
+                                Report Reminders
+                            </strong>
+
+                            <p>
+                                Receive reminders to review farm reports.
+                            </p>
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+                </section>
+
+
+                <!-- PREFERENCES -->
+
+                <section
+                    class="settings-section"
+                    id="preferences"
+                >
+
+                    <div class="settings-heading">
+
+                        <h2>Preferences</h2>
+
+                        <p>
+                            Customize how SmartFarm works for you.
+                        </p>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Temperature Unit
+                        </label>
+
+                        <select id="temperatureUnit">
+
+                            <option value="celsius">
+                                Celsius (°C)
+                            </option>
+
+                            <option value="fahrenheit">
+                                Fahrenheit (°F)
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Measurement System
+                        </label>
+
+                        <select id="measurementUnit">
+
+                            <option value="metric">
+                                Metric
+                            </option>
+
+                            <option value="imperial">
+                                Imperial
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Default Farm
+                        </label>
+
+                        <select>
+
+                            <option>
+                                Green Valley Farm
+                            </option>
+
+                            <option>
+                                Sunrise Farm
+                            </option>
+
+                            <option>
+                                Green Hills
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="settings-actions">
+
+                        <button
+                            class="save-button"
+                            id="savePreferences"
+                        >
+                            Save Preferences
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SECURITY -->
+
+                <section
+                    class="settings-section"
+                    id="security"
+                >
+
+                    <div class="settings-heading">
+
+                        <h2>Security</h2>
+
+                        <p>
+                            Manage your password and account security.
+                        </p>
+
+                    </div>
+
+
+                    <form id="passwordForm">
+
+                        <div class="form-group">
+
+                            <label>
+                                Current Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="currentPassword"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                New Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="newPassword"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Confirm New Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                            >
+
+                        </div>
+
+
+                        <div class="settings-actions">
+
+                            <button
+                                type="submit"
+                                class="save-button"
+                            >
+                                Update Password
+                            </button>
+
+                        </div>
+
+                    </form>
+
+
+                    <div class="danger-zone">
+
+                        <div>
+
+                            <h3>
+                                Delete Account
+                            </h3>
+
+                            <p>
+                                Permanently delete your SmartFarm account
+                                and associated data.
+                            </p>
+
+                        </div>
+
+                        <button class="delete-button">
+                            Delete Account
+                        </button>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<div
+    class="toast"
+    id="toast"
+>
+    Changes saved successfully.
+</div>
+
+
+<script src="js/settings.js"></script>
+
+</body>
+</html>

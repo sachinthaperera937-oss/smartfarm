@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SmartFarm | Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-icon">🌱</span>
+            <span>SmartFarm</span>
+        </div>
+
+        <nav class="navigation">
+
+            <a href="dashboard.html" class="nav-item active">
+                <span>▦</span>
+                Dashboard
+            </a>
+
+            <a href="farms.html" class="nav-item">
+                <span>⌂</span>
+                Farms
+            </a>
+
+            <a href="crops.html" class="nav-item">
+                <span>🌾</span>
+                Crops
+            </a>
+
+            <a href="weather.html" class="nav-item">
+                <span>☀</span>
+                Weather
+            </a>
+
+            <a href="recommendations.html" class="nav-item">
+                <span>✦</span>
+                AI Insights
+            </a>
+
+            <a href="reports.html" class="nav-item">
+                <span>▤</span>
+                Reports
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="settings.html" class="nav-item">
+                <span>⚙</span>
+                Settings
+            </a>
+
+            <a
+                href="login.html"
+                class="nav-item logout"
+                id="logoutButton"
+            >
+                <span>↪</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- HEADER -->
+        <header class="topbar">
+
+            <div>
+                <h1>Dashboard</h1>
+
+                <p>
+                    Monitor and manage your farms from one place.
+                </p>
+            </div>
+
+            <div class="user-area">
+
+                <button class="notification">
+                    🔔
+                </button>
+
+                <div class="user">
+
+                    <div class="avatar">
+                        F
+                    </div>
+
+                    <div>
+                        <strong>Farmer</strong>
+                        <small>Farm Manager</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- WELCOME -->
+        <section class="welcome">
+
+            <div>
+
+                <h2>
+                    Welcome back, Farmer 👋
+                </h2>
+
+                <p>
+                    Here's what's happening with your farms today.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- STAT CARDS -->
+        <section class="stats-grid">
+
+            <!-- TOTAL FARMS -->
+            <div class="stat-card">
+
+                <div class="stat-icon farm-icon">
+                    🌱
+                </div>
+
+                <div>
+
+                    <span>Total Farms</span>
+
+                    <h3 id="totalFarms">
+                        0
+                    </h3>
+
+                    <small>
+                        Active farms
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL CROPS -->
+            <div class="stat-card">
+
+                <div class="stat-icon crop-icon">
+                    🌾
+                </div>
+
+                <div>
+
+                    <span>Active Crops</span>
+
+                    <h3 id="totalCrops">
+                        0
+                    </h3>
+
+                    <small>
+                        Across all farms
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- TEMPERATURE -->
+            <div class="stat-card">
+
+                <div class="stat-icon weather-icon">
+                    ☀️
+                </div>
+
+                <div>
+
+                    <span>Temperature</span>
+
+                    <h3>
+                        31°C
+                    </h3>
+
+                    <small>
+                        Current conditions
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- AI ALERTS -->
+            <div class="stat-card">
+
+                <div class="stat-icon alert-icon">
+                    ⚠
+                </div>
+
+                <div>
+
+                    <span>AI Alerts</span>
+
+                    <h3>
+                        2
+                    </h3>
+
+                    <small>
+                        Needs attention
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DASHBOARD GRID -->
+        <section class="dashboard-grid">
+
+            <!-- WEATHER -->
+            <div class="dashboard-card weather-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            Weather Overview
+                        </h3>
+
+                        <p>
+                            Current farm conditions
+                        </p>
+
+                    </div>
+
+                    <a href="weather.html">
+                        View details →
+                    </a>
+
+                </div>
+
+
+                <div class="weather-main">
+
+                    <div class="temperature">
+
+                        <span>
+                            ☀️
+                        </span>
+
+                        <strong>
+                            31°C
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Partly Cloudy
+                        </strong>
+
+                        <p>
+                            Colombo, Sri Lanka
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="weather-details">
+
+                    <div>
+                        <span>Humidity</span>
+                        <strong>78%</strong>
+                    </div>
+
+                    <div>
+                        <span>Rainfall</span>
+                        <strong>12 mm</strong>
+                    </div>
+
+                    <div>
+                        <span>Wind</span>
+                        <strong>14 km/h</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- AI INSIGHT -->
+            <div class="dashboard-card ai-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            ✦ AI Smart Insight
+                        </h3>
+
+                        <p>
+                            Decision engine recommendation
+                        </p>
+
+                    </div>
+
+                    <span class="priority high">
+                        HIGH
+                    </span>
+
+                </div>
+
+
+                <div class="ai-content">
+
+                    <div class="ai-alert-icon">
+                        ⚠
+                    </div>
+
+                    <h4>
+                        High humidity detected
+                    </h4>
+
+                    <p>
+                        Current humidity is above 75%.
+                        Tomato crops may have an increased risk
+                        of fungal disease.
+                    </p>
+
+
+                    <div class="recommendation">
+
+                        <strong>
+                            Recommended action
+                        </strong>
+
+                        <span>
+                            Monitor tomato crops and avoid
+                            unnecessary irrigation today.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="recommendations.html"
+                    class="view-recommendations"
+                >
+                    View all recommendations →
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- YOUR FARMS -->
+        <section class="dashboard-card farms-section">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+                        Your Farms
+                    </h3>
+
+                    <p>
+                        Overview of your registered farms
+                    </p>
+
+                </div>
+
+                <a href="farms.html">
+                    View all →
+                </a>
+
+            </div>
+
+
+            <!-- REAL FARMS WILL LOAD HERE -->
+            <div
+                class="farm-list"
+                id="farmList"
+            >
+
+                <p>
+                    Loading farms...
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- DASHBOARD JAVASCRIPT -->
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>

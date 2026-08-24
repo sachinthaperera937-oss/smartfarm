@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartFarm | Login</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="login-page">
+
+    <!-- LEFT SIDE -->
+    <section class="login-info">
+
+        <div class="brand">
+            <span>🌱</span>
+            <strong>SmartFarm</strong>
+        </div>
+
+        <div class="hero-content">
+
+            <div class="hero-icon">
+                🌾
+            </div>
+
+            <h1>
+                Smarter farming.<br>
+                Better decisions.
+            </h1>
+
+            <p>
+                Manage your farms, monitor crops, understand weather
+                conditions and receive intelligent recommendations
+                from one platform.
+            </p>
+
+            <div class="features">
+
+                <div class="feature">
+                    <span>✓</span>
+                    <div>
+                        <strong>Farm Management</strong>
+                        <small>Manage multiple farms easily</small>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <span>✓</span>
+                    <div>
+                        <strong>Weather Monitoring</strong>
+                        <small>Track current weather conditions</small>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <span>✓</span>
+                    <div>
+                        <strong>Smart Recommendations</strong>
+                        <small>Make better farming decisions</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            © 2026 SmartFarm Management System
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT SIDE -->
+    <section class="login-form-section">
+
+        <div class="login-box">
+
+            <div class="mobile-logo">
+                🌱 SmartFarm
+            </div>
+
+            <h2>Welcome back</h2>
+
+            <p class="subtitle">
+                Sign in to access your farm dashboard.
+            </p>
+
+
+            <form id="loginForm">
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="farmer@example.com"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <div class="password-label">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <a href="#">
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="remember">
+
+                    <label>
+                        <input type="checkbox">
+                        <span>Remember me</span>
+                    </label>
+
+                </div>
+
+
+                <button type="submit" class="login-button">
+                    Sign In
+                </button>
+
+            </form>
+
+
+            <div class="divider">
+                <span>OR</span>
+            </div>
+
+
+            <div class="demo-login">
+
+                <p>For frontend testing</p>
+
+                <button type="button" id="demoButton">
+                    Continue with Demo Account
+                </button>
+
+            </div>
+
+
+            <p class="register-text">
+                Don't have an account?
+                <a href="#">Create account</a>
+            </p>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script src="js/auth.js"></script>
+
+</body>
+</html>
