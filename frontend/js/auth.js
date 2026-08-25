@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://smartfarm-hpam.onrender.com/api";
 
 const loginForm = document.getElementById("loginForm");
 
@@ -32,11 +32,23 @@ if (loginForm) {
                 throw new Error(data.message || "Login failed");
             }
 
+            if (!data.token) {
+                throw new Error(
+                    "Login succeeded, but no authentication token was received."
+                );
+            }
+
+            // Remove any old authentication data
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+
+            // Save fresh JWT token
             localStorage.setItem("token", data.token);
 
+            // Save logged-in user information
             localStorage.setItem(
                 "user",
-                JSON.stringify(data.user)
+                JSON.stringify(data.user || {})
             );
 
             alert("Login successful!");
@@ -45,7 +57,11 @@ if (loginForm) {
 
         } catch (error) {
             console.error("Login error:", error);
-            alert(error.message);
+
+            alert(
+                error.message ||
+                "Unable to connect to the SmartFarm server."
+            );
 
         } finally {
             loginButton.disabled = false;
@@ -54,6 +70,10 @@ if (loginForm) {
     });
 }
 
+
+// ========================================
+// DEMO BUTTON
+// ========================================
 
 const demoButton = document.getElementById("demoButton");
 

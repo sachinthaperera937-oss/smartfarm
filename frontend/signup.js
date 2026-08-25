@@ -1,0 +1,3 @@
+const form=document.querySelector('#signupForm');
+const accounts=()=>JSON.parse(localStorage.getItem('smartfarm-accounts')||'[]');
+form.addEventListener('submit',event=>{event.preventDefault();const name=document.querySelector('#name').value.trim();const email=document.querySelector('#email').value.trim().toLowerCase();const password=document.querySelector('#password').value;const error=document.querySelector('#signupError');if(accounts().some(account=>account.email===email)){error.textContent='An account with this email already exists. Please sign in instead.';return}localStorage.setItem('smartfarm-accounts',JSON.stringify([...accounts(),{name,email,password}]));localStorage.setItem('smartfarm-user',JSON.stringify({name,email}));window.location.replace('index.html')});

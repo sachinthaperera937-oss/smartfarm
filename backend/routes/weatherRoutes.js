@@ -1,11 +1,5 @@
-const express = require("express");
-
-const router = express.Router();
-
+const router = require("express").Router();
 const { getWeather } = require("../controllers/weatherController");
-const protect = require("../middleware/authMiddleware");
 
-// Get current weather + 5-day forecast
-router.get("/", protect, getWeather);
-
+router.get("/", getWeather);
 module.exports = router;

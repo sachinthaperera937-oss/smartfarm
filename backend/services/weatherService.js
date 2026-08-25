@@ -7,10 +7,11 @@ const BASE_URL = 'https://api.open-meteo.com/v1/forecast';
  */
 async function getCurrentWeather(latitude, longitude) {
   const { data } = await axios.get(BASE_URL, {
+    timeout: 8000,
     params: {
       latitude,
       longitude,
-      current: 'temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weathercode,wind_speed_10m,uv_index',
+      current: 'temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m,uv_index',
       timezone: 'auto'
     }
   });
@@ -24,7 +25,7 @@ async function getCurrentWeather(latitude, longitude) {
     humidity: c.relative_humidity_2m,
     windSpeed: c.wind_speed_10m,
     precipitation: c.precipitation,
-    weatherCode: c.weathercode,
+    weatherCode: c.weather_code,
     uvIndex: c.uv_index ?? null
   };
 }
@@ -34,10 +35,11 @@ async function getCurrentWeather(latitude, longitude) {
  */
 async function getForecast(latitude, longitude, days = 5) {
   const { data } = await axios.get(BASE_URL, {
+    timeout: 8000,
     params: {
       latitude,
       longitude,
-      daily: 'weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max',
+      daily: 'weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max',
       timezone: 'auto',
       forecast_days: days
     }
@@ -49,7 +51,7 @@ async function getForecast(latitude, longitude, days = 5) {
     date,
     temperature: d.temperature_2m_max[i],
     temperatureMin: d.temperature_2m_min[i],
-    weatherCode: d.weathercode[i],
+    weatherCode: d.weather_code[i],
     precipitationProbability: d.precipitation_probability_max[i]
   }));
 }

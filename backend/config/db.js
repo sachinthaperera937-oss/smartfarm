@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const connectDB = async () => {
+    if (!process.env.MONGO_URI) {
+        console.warn("MongoDB is not configured; starting in dashboard/demo mode.");
+        return;
+    }
+
     try {
         const conn = await mongoose.connect(
             process.env.MONGO_URI
@@ -16,7 +21,7 @@ const connectDB = async () => {
             error.message
         );
 
-        process.exit(1);
+        console.error("Continuing without database connectivity so health and weather services remain available.");
     }
 };
 

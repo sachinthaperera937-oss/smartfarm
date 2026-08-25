@@ -1,11 +1,45 @@
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://smartfarm-hpam.onrender.com/api";
 
-// Get saved token
+// ========================================
+// AUTHENTICATION
+// ========================================
+
 const token = localStorage.getItem("token");
 
-// Redirect to login if user is not logged in
 if (!token) {
     window.location.href = "login.html";
+}
+
+
+// ========================================
+// GET AUTH HEADERS
+// ========================================
+
+function getHeaders() {
+    return {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+    };
+}
+
+
+// ========================================
+// HANDLE API ERRORS
+// ========================================
+
+function handleUnauthorized(response) {
+    if (response.status === 401) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+
+        alert("Your session has expired. Please log in again.");
+
+        window.location.href = "login.html";
+
+        return true;
+    }
+
+    return false;
 }
 
 
@@ -19,12 +53,13 @@ const loadDashboard = async () => {
             `${API_URL}/dashboard`,
             {
                 method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                }
+                headers: getHeaders()
             }
         );
+
+        if (handleUnauthorized(response)) {
+            return;
+        }
 
         const data = await response.json();
 
@@ -34,12 +69,21 @@ const loadDashboard = async () => {
             );
         }
 
-        // Update statistics
-        document.getElementById("totalFarms").textContent =
-            data.dashboard.totalFarms;
+        const totalFarmsElement =
+            document.getElementById("totalFarms");
 
-        document.getElementById("totalCrops").textContent =
-            data.dashboard.totalCrops;
+        const totalCropsElement =
+            document.getElementById("totalCrops");
+
+        if (totalFarmsElement) {
+            totalFarmsElement.textContent =
+                data.dashboard?.totalFarms ?? 0;
+        }
+
+        if (totalCropsElement) {
+            totalCropsElement.textContent =
+                data.dashboard?.totalCrops ?? 0;
+        }
 
     } catch (error) {
         console.error("Dashboard error:", error);
@@ -52,17 +96,25 @@ const loadDashboard = async () => {
 // ========================================
 
 const loadFarms = async () => {
+    const farmList =
+        document.getElementById("farmList");
+
+    if (!farmList) {
+        return;
+    }
+
     try {
         const response = await fetch(
             `${API_URL}/farms`,
             {
                 method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                }
+                headers: getHeaders()
             }
         );
+
+        if (handleUnauthorized(response)) {
+            return;
+        }
 
         const data = await response.json();
 
@@ -71,9 +123,6 @@ const loadFarms = async () => {
                 data.message || "Failed to load farms"
             );
         }
-
-        const farmList =
-            document.getElementById("farmList");
 
         // Check if there are no farms
         if (!data.farms || data.farms.length === 0) {
@@ -102,7 +151,8 @@ const loadFarms = async () => {
                     </div>
 
                     <div>
-                        <strong>${farm.name}</strong>
+                        <strong>${farm.name || "Unnamed Farm"}</strong>
+
                         <span>
                             ${farm.location || "Location not specified"}
                             •
@@ -130,8 +180,8 @@ const loadFarms = async () => {
     } catch (error) {
         console.error("Farm loading error:", error);
 
-        document.getElementById("farmList").innerHTML = `
-            <p>Failed to load farms.</p>
+        farmList.innerHTML = `
+            <p>Failed to load farms. Please try again.</p>
         `;
     }
 };
@@ -148,27 +198,46 @@ const loadUser = () => {
         return;
     }
 
-    const user = JSON.parse(userData);
+    try {
+        const user = JSON.parse(userData);
 
-    const userName =
-        user.name || "Farmer";
+        const userName =
+            user.name || "Farmer";
 
-    // Update user name
-    document.querySelector(".user strong").textContent =
-        userName;
+        const userNameElement =
+            document.querySelector(".user strong");
 
-    // Update welcome message
-    document.querySelector(".welcome h2").textContent =
-        `Welcome back, ${userName} 👋`;
+        const welcomeElement =
+            document.querySelector(".welcome h2");
 
-    // Update avatar
-    document.querySelector(".avatar").textContent =
-        userName.charAt(0).toUpperCase();
+        const avatarElement =
+            document.querySelector(".avatar");
+
+        if (userNameElement) {
+            userNameElement.textContent = userName;
+        }
+
+        if (welcomeElement) {
+            welcomeElement.textContent =
+                `Welcome back, ${userName} 👋`;
+        }
+
+        if (avatarElement) {
+            avatarElement.textContent =
+                userName.charAt(0).toUpperCase();
+        }
+
+    } catch (error) {
+        console.error(
+            "Failed to load user information:",
+            error
+        );
+    }
 };
 
 
 // ========================================
-// START
+// START APPLICATION
 // ========================================
 
 loadUser();

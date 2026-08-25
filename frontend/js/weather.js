@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://smartfarm-hpam.onrender.com/api";
 
 // ========================================
 // AUTHENTICATION
@@ -12,7 +12,7 @@ if (!token) {
 
 
 // ========================================
-// WEATHER LOCATIONS
+// LOCATIONS
 // ========================================
 
 const locations = {
@@ -41,10 +41,7 @@ const locations = {
 // ========================================
 
 const WEATHER_ENDPOINT = `${API_URL}/weather`;
-
 const FORECAST_ENDPOINT = `${API_URL}/weather/forecast`;
-
-const FARMS_ENDPOINT = `${API_URL}/farms`;
 
 
 // ========================================
@@ -93,83 +90,63 @@ const forecastGrid =
 const weatherAlert =
     document.getElementById("weatherAlert");
 
-const farmConditionGrid =
-    document.getElementById("farmConditionGrid");
-
 
 // ========================================
-// GET AUTH HEADERS
+// GET HEADERS
 // ========================================
 
 function getHeaders() {
 
-    const headers = {
+    return {
+        "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json"
     };
 
-    if (token) {
-        headers.Authorization = `Bearer ${token}`;
-    }
-
-    return headers;
 }
 
 
 // ========================================
-// WEATHER CODE → WEATHER INFORMATION
-// Open-Meteo weather codes
+// WEATHER CODE → INFORMATION
+// Open-Meteo Weather Codes
 // ========================================
 
 function getWeatherInfo(weatherCode) {
 
     const code = Number(weatherCode);
 
-
     if (code === 0) {
-
         return {
             icon: "☀️",
             status: "Clear Sky"
         };
-
     }
-
 
     if (
         code === 1 ||
         code === 2
     ) {
-
         return {
             icon: "🌤️",
             status: "Mostly Sunny"
         };
-
     }
 
-
     if (code === 3) {
-
         return {
             icon: "☁️",
             status: "Overcast"
         };
-
     }
-
 
     if (
         code === 45 ||
         code === 48
     ) {
-
         return {
             icon: "🌫️",
             status: "Foggy"
         };
-
     }
-
 
     if (
         code === 51 ||
@@ -178,14 +155,11 @@ function getWeatherInfo(weatherCode) {
         code === 56 ||
         code === 57
     ) {
-
         return {
             icon: "🌦️",
             status: "Light Rain"
         };
-
     }
-
 
     if (
         code === 61 ||
@@ -194,14 +168,11 @@ function getWeatherInfo(weatherCode) {
         code === 66 ||
         code === 67
     ) {
-
         return {
             icon: "🌧️",
             status: "Rainy"
         };
-
     }
-
 
     if (
         code === 71 ||
@@ -209,42 +180,33 @@ function getWeatherInfo(weatherCode) {
         code === 75 ||
         code === 77
     ) {
-
         return {
             icon: "❄️",
             status: "Snow"
         };
-
     }
-
 
     if (
         code === 80 ||
         code === 81 ||
         code === 82
     ) {
-
         return {
             icon: "🌦️",
             status: "Rain Showers"
         };
-
     }
-
 
     if (
         code === 95 ||
         code === 96 ||
         code === 99
     ) {
-
         return {
             icon: "⛈️",
             status: "Thunderstorm"
         };
-
     }
-
 
     return {
         icon: "🌤️",
@@ -258,7 +220,7 @@ function getWeatherInfo(weatherCode) {
 // FORMAT DATE
 // ========================================
 
-function formatCurrentDate(dateString) {
+function formatDate(dateString) {
 
     if (!dateString) {
 
@@ -273,10 +235,7 @@ function formatCurrentDate(dateString) {
 
     }
 
-
-    const date =
-        new Date(dateString);
-
+    const date = new Date(dateString);
 
     if (isNaN(date.getTime())) {
 
@@ -290,7 +249,6 @@ function formatCurrentDate(dateString) {
         );
 
     }
-
 
     return date.toLocaleDateString(
         "en-US",
@@ -317,15 +275,12 @@ function formatForecastDay(
         return "Today";
     }
 
-
     const date =
         new Date(dateString);
-
 
     if (isNaN(date.getTime())) {
         return `Day ${index + 1}`;
     }
-
 
     return date.toLocaleDateString(
         "en-US",
@@ -341,81 +296,32 @@ function formatForecastDay(
 // GET UV LABEL
 // ========================================
 
-function getUVLabel(uvIndex) {
+function getUVLabel(value) {
 
-    const value =
-        Number(uvIndex);
+    const uvValue =
+        Number(value);
 
-
-    if (isNaN(value)) {
+    if (isNaN(uvValue)) {
         return "--";
     }
 
-
-    if (value <= 2) {
-        return `${value} Low`;
+    if (uvValue <= 2) {
+        return `${uvValue} Low`;
     }
 
-
-    if (value <= 5) {
-        return `${value} Moderate`;
+    if (uvValue <= 5) {
+        return `${uvValue} Moderate`;
     }
 
-
-    if (value <= 7) {
-        return `${value} High`;
+    if (uvValue <= 7) {
+        return `${uvValue} High`;
     }
 
-
-    if (value <= 10) {
-        return `${value} Very High`;
+    if (uvValue <= 10) {
+        return `${uvValue} Very High`;
     }
 
-
-    return `${value} Extreme`;
-
-}
-
-
-// ========================================
-// CALCULATE APPROXIMATE UV
-// Fallback if backend does not provide UV
-// ========================================
-
-function calculateApproximateUV(
-    temperatureValue,
-    weatherCode
-) {
-
-    const code =
-        Number(weatherCode);
-
-
-    if (
-        code === 0 ||
-        code === 1
-    ) {
-
-        if (temperatureValue >= 30) {
-            return 9;
-        }
-
-        return 7;
-
-    }
-
-
-    if (
-        code === 2 ||
-        code === 3
-    ) {
-
-        return 4;
-
-    }
-
-
-    return 2;
+    return `${uvValue} Extreme`;
 
 }
 
@@ -433,47 +339,41 @@ function generateWeatherAlert(weather) {
             0
         );
 
-
     const humidityValue =
         Number(
             weather.humidity ||
+            weather.relativeHumidity ||
+            weather.relative_humidity_2m ||
             0
         );
-
 
     const windSpeed =
         Number(
             weather.windSpeed ||
             weather.windspeed ||
+            weather.wind_speed_10m ||
             0
         );
-
 
     const temperatureValue =
         Number(
             weather.temperature ||
+            weather.temperature_2m ||
             0
         );
 
-
     const weatherCode =
         Number(
-            weather.weatherCode
+            weather.weatherCode ??
+            weather.weathercode ??
+            0
         );
 
+    if (weatherCode >= 95) {
 
-    if (
-        weatherCode >= 95
-    ) {
-
-        return `
-            Thunderstorms are possible.
-            Secure farm equipment and avoid field work
-            during severe weather.
-        `;
+        return "Thunderstorms are possible. Secure farm equipment and avoid field work during severe weather.";
 
     }
-
 
     if (
         rain >= 5 ||
@@ -485,146 +385,68 @@ function generateWeatherAlert(weather) {
         weatherCode === 82
     ) {
 
-        return `
-            Rain is expected or currently occurring.
-            Consider postponing irrigation and monitor
-            water drainage around your crops.
-        `;
+        return "Rain is expected or currently occurring. Consider postponing irrigation and monitor water drainage around your crops.";
 
     }
 
+    if (humidityValue >= 85) {
 
-    if (
-        humidityValue >= 85
-    ) {
-
-        return `
-            High humidity may increase the risk of fungal
-            diseases. Monitor crops and ensure proper
-            ventilation and drainage.
-        `;
+        return "High humidity may increase the risk of fungal diseases. Monitor crops and ensure proper ventilation and drainage.";
 
     }
 
+    if (temperatureValue >= 34) {
 
-    if (
-        temperatureValue >= 34
-    ) {
-
-        return `
-            High temperatures may cause crop stress.
-            Ensure adequate irrigation and monitor plants
-            for heat damage.
-        `;
+        return "High temperatures may cause crop stress. Ensure adequate irrigation and monitor plants for heat damage.";
 
     }
 
+    if (windSpeed >= 30) {
 
-    if (
-        windSpeed >= 30
-    ) {
-
-        return `
-            Strong winds are affecting the area.
-            Secure young plants and farming equipment.
-        `;
+        return "Strong winds are affecting the area. Secure young plants and farming equipment.";
 
     }
 
-
-    if (
-        temperatureValue <= 20
-    ) {
-
-        return `
-            Cooler temperatures may slow crop growth.
-            Monitor sensitive crops and adjust irrigation
-            when necessary.
-        `;
-
-    }
-
-
-    return `
-        Weather conditions are currently suitable for
-        normal farming activities. Continue monitoring
-        your crops and irrigation requirements.
-    `;
+    return "Weather conditions are currently suitable for normal farming activities. Continue monitoring your crops and irrigation requirements.";
 
 }
 
 
 // ========================================
-// FETCH CURRENT WEATHER
+// LOAD CURRENT WEATHER
 // ========================================
 
-async function loadCurrentWeather(
-    locationKey
-) {
+async function loadCurrentWeather(locationKey) {
 
     const location =
         locations[locationKey];
 
-
     if (!location) {
-
-        console.error(
-            "Invalid location:",
-            locationKey
-        );
-
         return;
-
     }
-
 
     try {
 
         locationName.textContent =
             "Loading location...";
 
-
         weatherStatus.textContent =
             "Loading weather...";
-
-
-        temperature.textContent =
-            "--";
-
-
-        humidity.textContent =
-            "--";
-
-
-        wind.textContent =
-            "--";
-
-
-        rainfall.textContent =
-            "--";
-
 
         weatherIcon.textContent =
             "⏳";
 
-
         const response =
             await fetch(
-
                 `${WEATHER_ENDPOINT}?latitude=${location.latitude}&longitude=${location.longitude}`,
-
                 {
                     method: "GET",
-
                     headers: getHeaders()
                 }
-
             );
-
 
         const data =
             await response.json();
-
 
         if (!response.ok) {
 
@@ -635,20 +457,16 @@ async function loadCurrentWeather(
 
         }
 
-
         const weather =
             data.weather || data;
-
 
         const weatherCode =
             weather.weatherCode ??
             weather.weathercode ??
             0;
 
-
         const weatherInfo =
             getWeatherInfo(weatherCode);
-
 
         const temperatureValue =
             Number(
@@ -656,7 +474,6 @@ async function loadCurrentWeather(
                 weather.temperature_2m ??
                 0
             );
-
 
         const humidityValue =
             Number(
@@ -666,7 +483,6 @@ async function loadCurrentWeather(
                 0
             );
 
-
         const windValue =
             Number(
                 weather.windSpeed ??
@@ -675,96 +491,56 @@ async function loadCurrentWeather(
                 0
             );
 
-
-        const precipitationValue =
+        const rainfallValue =
             Number(
                 weather.precipitation ??
                 weather.rain ??
                 0
             );
 
-
         const feelsLikeValue =
-            weather.feelsLike ??
-            weather.apparentTemperature ??
-            weather.apparent_temperature ??
-            temperatureValue;
-
+            Number(
+                weather.feelsLike ??
+                weather.apparentTemperature ??
+                weather.apparent_temperature ??
+                temperatureValue
+            );
 
         const uvValue =
             weather.uvIndex ??
             weather.uv ??
-            calculateApproximateUV(
-                temperatureValue,
-                weatherCode
-            );
+            "--";
 
-
-        // LOCATION
 
         locationName.textContent =
             location.name;
 
-
-        // WEATHER ICON
-
         weatherIcon.textContent =
             weatherInfo.icon;
-
-
-        // WEATHER STATUS
 
         weatherStatus.textContent =
             weatherInfo.status;
 
-
-        // TEMPERATURE
-
         temperature.textContent =
-            Math.round(
-                temperatureValue
-            );
-
-
-        // FEELS LIKE
+            Math.round(temperatureValue);
 
         feelsLike.textContent =
             `${Math.round(feelsLikeValue)}°`;
 
-
-        // HUMIDITY
-
         humidity.textContent =
             `${Math.round(humidityValue)}%`;
-
-
-        // WIND SPEED
 
         wind.textContent =
             `${Math.round(windValue)} km/h`;
 
-
-        // RAINFALL
-
         rainfall.textContent =
-            `${precipitationValue.toFixed(1)} mm`;
-
-
-        // UV INDEX
+            `${rainfallValue.toFixed(1)} mm`;
 
         uv.textContent =
             getUVLabel(uvValue);
 
-
-        // DATE
-
         currentDate.textContent =
-            formatCurrentDate(
-                weather.time
-            );
-
-
-        // LAST UPDATED
+            formatDate(weather.time);
 
         lastUpdated.textContent =
             `Last updated ${new Date().toLocaleTimeString(
@@ -775,12 +551,8 @@ async function loadCurrentWeather(
                 }
             )}`;
 
-
-        // FARMING ALERT
-
         weatherAlert.textContent =
             generateWeatherAlert(weather);
-
 
     } catch (error) {
 
@@ -789,25 +561,17 @@ async function loadCurrentWeather(
             error
         );
 
-
         locationName.textContent =
-            locations[locationKey].name;
-
-
-        weatherStatus.textContent =
-            "Weather unavailable";
-
+            location.name;
 
         weatherIcon.textContent =
             "⚠️";
 
-
-        lastUpdated.textContent =
-            "Unable to update weather";
-
+        weatherStatus.textContent =
+            "Weather unavailable";
 
         weatherAlert.textContent =
-            "Unable to load real-time weather data. Please check your backend server and try again.";
+            error.message || "Unable to load weather data.";
 
     }
 
@@ -815,16 +579,17 @@ async function loadCurrentWeather(
 
 
 // ========================================
-// LOAD 5 DAY FORECAST
+// LOAD FORECAST
 // ========================================
 
-async function loadForecast(
-    locationKey
-) {
+async function loadForecast(locationKey) {
 
     const location =
         locations[locationKey];
 
+    if (!location) {
+        return;
+    }
 
     forecastGrid.innerHTML = `
         <p class="loading-message">
@@ -832,26 +597,19 @@ async function loadForecast(
         </p>
     `;
 
-
     try {
 
         const response =
             await fetch(
-
                 `${FORECAST_ENDPOINT}?latitude=${location.latitude}&longitude=${location.longitude}`,
-
                 {
                     method: "GET",
-
                     headers: getHeaders()
                 }
-
             );
-
 
         const data =
             await response.json();
-
 
         if (!response.ok) {
 
@@ -862,14 +620,11 @@ async function loadForecast(
 
         }
 
-
         let forecastData =
             data.forecast ||
             data.daily ||
             [];
 
-
-        // Support Open-Meteo style daily object
 
         if (
             !Array.isArray(forecastData) &&
@@ -881,7 +636,6 @@ async function loadForecast(
                     function(date, index) {
 
                         return {
-
                             date: date,
 
                             temperature:
@@ -898,7 +652,6 @@ async function loadForecast(
                                 forecastData.precipitation_probability_max
                                     ? forecastData.precipitation_probability_max[index]
                                     : 0
-
                         };
 
                     }
@@ -918,11 +671,9 @@ async function loadForecast(
 
         }
 
-
         displayForecast(
             forecastData.slice(0, 5)
         );
-
 
     } catch (error) {
 
@@ -930,7 +681,6 @@ async function loadForecast(
             "Forecast loading error:",
             error
         );
-
 
         forecastGrid.innerHTML = `
             <p class="loading-message">
@@ -947,12 +697,9 @@ async function loadForecast(
 // DISPLAY FORECAST
 // ========================================
 
-function displayForecast(
-    forecastData
-) {
+function displayForecast(forecastData) {
 
     forecastGrid.innerHTML = "";
-
 
     forecastData.forEach(
         function(day, index) {
@@ -962,10 +709,8 @@ function displayForecast(
                 day.weathercode ??
                 0;
 
-
             const weatherInfo =
                 getWeatherInfo(weatherCode);
-
 
             const temperatureValue =
                 day.temperature ??
@@ -974,34 +719,26 @@ function displayForecast(
                 day.temperature_2m_max ??
                 0;
 
-
             const rainProbability =
                 day.precipitationProbability ??
                 day.rainProbability ??
                 day.precipitation_probability_max ??
                 0;
 
-
             const date =
                 day.date ??
                 day.time;
 
-
             const card =
                 document.createElement("div");
-
 
             card.className =
                 "forecast-card";
 
-
             card.innerHTML = `
 
                 <span class="forecast-day">
-                    ${formatForecastDay(
-                        date,
-                        index
-                    )}
+                    ${formatForecastDay(date, index)}
                 </span>
 
                 <span class="forecast-icon">
@@ -1009,9 +746,7 @@ function displayForecast(
                 </span>
 
                 <strong>
-                    ${Math.round(
-                        temperatureValue
-                    )}°
+                    ${Math.round(temperatureValue)}°
                 </strong>
 
                 <span>
@@ -1019,374 +754,14 @@ function displayForecast(
                 </span>
 
                 <small>
-                    ${Math.round(
-                        rainProbability
-                    )}% rain
+                    ${Math.round(rainProbability)}% rain
                 </small>
 
             `;
 
-
-            forecastGrid.appendChild(
-                card
-            );
+            forecastGrid.appendChild(card);
 
         }
-    );
-
-}
-
-
-// ========================================
-// LOAD FARMS
-// ========================================
-
-async function loadFarmConditions() {
-
-    if (!farmConditionGrid) {
-        return;
-    }
-
-
-    farmConditionGrid.innerHTML = `
-        <p class="loading-message">
-            Loading farm conditions...
-        </p>
-    `;
-
-
-    try {
-
-        const response =
-            await fetch(
-
-                FARMS_ENDPOINT,
-
-                {
-                    method: "GET",
-
-                    headers: getHeaders()
-                }
-
-            );
-
-
-        const data =
-            await response.json();
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                data.message ||
-                "Failed to load farms"
-            );
-
-        }
-
-
-        const farms =
-            data.farms || [];
-
-
-        if (farms.length === 0) {
-
-            farmConditionGrid.innerHTML = `
-                <p class="loading-message">
-                    No farms available.
-                </p>
-            `;
-
-            return;
-
-        }
-
-
-        farmConditionGrid.innerHTML = "";
-
-
-        for (
-            const farm of farms
-        ) {
-
-            await createFarmWeatherCard(
-                farm
-            );
-
-        }
-
-
-    } catch (error) {
-
-        console.error(
-            "Farm conditions error:",
-            error
-        );
-
-
-        farmConditionGrid.innerHTML = `
-            <p class="loading-message">
-                Unable to load farm weather conditions.
-            </p>
-        `;
-
-    }
-
-}
-
-
-// ========================================
-// CREATE FARM WEATHER CARD
-// ========================================
-
-async function createFarmWeatherCard(
-    farm
-) {
-
-    const locationText =
-        farm.location ||
-        "Unknown location";
-
-
-    const matchedLocation =
-        Object.values(locations).find(
-            function(location) {
-
-                return location.name
-                    .toLowerCase()
-                    .includes(
-                        locationText
-                            .toLowerCase()
-                    );
-
-            }
-        );
-
-
-    // If no matching location,
-    // show a basic card
-
-    if (!matchedLocation) {
-
-        appendFarmCard(
-            farm,
-            null,
-            null
-        );
-
-        return;
-
-    }
-
-
-    try {
-
-        const response =
-            await fetch(
-
-                `${WEATHER_ENDPOINT}?latitude=${matchedLocation.latitude}&longitude=${matchedLocation.longitude}`,
-
-                {
-                    headers: getHeaders()
-                }
-
-            );
-
-
-        const data =
-            await response.json();
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Weather unavailable"
-            );
-
-        }
-
-
-        appendFarmCard(
-            farm,
-            data.weather || data,
-            matchedLocation
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "Farm weather error:",
-            error
-        );
-
-
-        appendFarmCard(
-            farm,
-            null,
-            matchedLocation
-        );
-
-    }
-
-}
-
-
-// ========================================
-// APPEND FARM WEATHER CARD
-// ========================================
-
-function appendFarmCard(
-    farm,
-    weather,
-    location
-) {
-
-    const card =
-        document.createElement("div");
-
-
-    card.className =
-        "condition-card";
-
-
-    let temperatureValue = "--";
-
-    let humidityValue = "--";
-
-    let rainRisk = "--";
-
-    let condition = "Monitor";
-
-    let conditionClass =
-        "condition-warning";
-
-
-    if (weather) {
-
-        temperatureValue =
-            `${Math.round(
-                weather.temperature || 0
-            )}°C`;
-
-
-        humidityValue =
-            `${Math.round(
-                weather.humidity || 0
-            )}%`;
-
-
-        const precipitation =
-            Number(
-                weather.precipitation ||
-                weather.rain ||
-                0
-            );
-
-
-        const weatherCode =
-            Number(
-                weather.weatherCode || 0
-            );
-
-
-        if (
-            precipitation >= 5 ||
-            weatherCode >= 61
-        ) {
-
-            rainRisk =
-                "High";
-
-            condition =
-                "Monitor";
-
-        } else {
-
-            rainRisk =
-                "Low";
-
-            condition =
-                "Good";
-
-            conditionClass =
-                "condition-good";
-
-        }
-
-    }
-
-
-    card.innerHTML = `
-
-        <div class="condition-top">
-
-            <div>
-
-                <h3>
-                    ${farm.name || "Unnamed Farm"}
-                </h3>
-
-                <span>
-                    ${farm.location || "Unknown location"}
-                </span>
-
-            </div>
-
-            <span class="${conditionClass}">
-                ${condition}
-            </span>
-
-        </div>
-
-
-        <div class="condition-details">
-
-            <div>
-
-                <span>
-                    Temperature
-                </span>
-
-                <strong>
-                    ${temperatureValue}
-                </strong>
-
-            </div>
-
-
-            <div>
-
-                <span>
-                    Humidity
-                </span>
-
-                <strong>
-                    ${humidityValue}
-                </strong>
-
-            </div>
-
-
-            <div>
-
-                <span>
-                    Rain Risk
-                </span>
-
-                <strong>
-                    ${rainRisk}
-                </strong>
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    farmConditionGrid.appendChild(
-        card
     );
 
 }
@@ -1396,45 +771,21 @@ function appendFarmCard(
 // LOCATION CHANGE
 // ========================================
 
-locationSelect.addEventListener(
-    "change",
-    function() {
+if (locationSelect) {
 
-        const selectedLocation =
-            locationSelect.value;
-
-
-        loadCurrentWeather(
-            selectedLocation
-        );
-
-
-        loadForecast(
-            selectedLocation
-        );
-
-    }
-);
-
-
-// ========================================
-// LOGOUT
-// ========================================
-
-const logoutButton =
-    document.querySelector(
-        'a[href="login.html"]'
-    );
-
-
-if (logoutButton) {
-
-    logoutButton.addEventListener(
-        "click",
+    locationSelect.addEventListener(
+        "change",
         function() {
 
-            localStorage.removeItem(
-                "token"
+            const selectedLocation =
+                locationSelect.value;
+
+            loadCurrentWeather(
+                selectedLocation
+            );
+
+            loadForecast(
+                selectedLocation
             );
 
         }
@@ -1444,40 +795,51 @@ if (logoutButton) {
 
 
 // ========================================
-// INITIALIZE WEATHER PAGE
+// LOGOUT
 // ========================================
 
-async function initializeWeatherPage() {
+const logoutButton =
+    document.getElementById("logoutButton");
 
-    const selectedLocation =
-        locationSelect.value ||
-        "colombo";
+if (logoutButton) {
 
+    logoutButton.addEventListener(
+        "click",
+        function(event) {
 
-    // Load current weather
+            event.preventDefault();
 
-    await loadCurrentWeather(
-        selectedLocation
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+
+            window.location.href =
+                "login.html";
+
+        }
     );
-
-
-    // Load 5-day forecast
-
-    loadForecast(
-        selectedLocation
-    );
-
-
-    // Load weather conditions
-    // for all registered farms
-
-    loadFarmConditions();
 
 }
 
 
 // ========================================
-// START APPLICATION
+// INITIALIZE
 // ========================================
+
+async function initializeWeatherPage() {
+
+    const selectedLocation =
+        locationSelect
+            ? locationSelect.value || "colombo"
+            : "colombo";
+
+    await loadCurrentWeather(
+        selectedLocation
+    );
+
+    loadForecast(
+        selectedLocation
+    );
+
+}
 
 initializeWeatherPage();
