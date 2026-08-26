@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -134,26 +135,27 @@
                 </div>
 
 
+                <!-- STATUS FILTER -->
                 <select id="stageFilter">
 
                     <option value="all">
-                        All Growth Stages
+                        All Statuses
                     </option>
 
-                    <option value="Seedling">
-                        Seedling
+                    <option value="planned">
+                        Planned
                     </option>
 
-                    <option value="Vegetative">
-                        Vegetative
+                    <option value="planted">
+                        Planted
                     </option>
 
-                    <option value="Flowering">
-                        Flowering
+                    <option value="growing">
+                        Growing
                     </option>
 
-                    <option value="Harvest">
-                        Harvest
+                    <option value="harvested">
+                        Harvested
                     </option>
 
                 </select>
@@ -164,6 +166,7 @@
             <button
                 class="add-crop-button"
                 id="addCropButton"
+                type="button"
             >
                 + Add New Crop
             </button>
@@ -218,7 +221,7 @@
                 </div>
 
                 <div>
-                    <span>Flowering</span>
+                    <span>Planted</span>
 
                     <strong id="floweringCrops">
                         0
@@ -236,7 +239,7 @@
                 </div>
 
                 <div>
-                    <span>Needs Attention</span>
+                    <span>Planned</span>
 
                     <strong id="attentionCrops">
                         0
@@ -396,11 +399,11 @@
             </div>
 
 
-            <!-- GROWTH STAGE -->
+            <!-- CROP STATUS -->
             <div class="form-group">
 
                 <label for="growthStage">
-                    Growth Stage
+                    Crop Status
                 </label>
 
                 <select
@@ -409,23 +412,23 @@
                 >
 
                     <option value="">
-                        Select stage
+                        Select status
                     </option>
 
-                    <option value="Seedling">
-                        Seedling
+                    <option value="planned">
+                        Planned
                     </option>
 
-                    <option value="Vegetative">
-                        Vegetative
+                    <option value="planted">
+                        Planted
                     </option>
 
-                    <option value="Flowering">
-                        Flowering
+                    <option value="growing">
+                        Growing
                     </option>
 
-                    <option value="Harvest">
-                        Harvest
+                    <option value="harvested">
+                        Harvested
                     </option>
 
                 </select>
@@ -464,4 +467,5 @@
 <script src="js/crops.js"></script>
 
 </body>
+
 </html>
