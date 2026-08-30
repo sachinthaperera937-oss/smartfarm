@@ -1,4 +1,6 @@
-const API_URL = "https://smartfarm-hpam.onrender.com/api";
+const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://localhost:5000/api"
+    : "/api";
 
 // ========================================
 // AUTHENTICATION
@@ -410,9 +412,9 @@ if (cropForm) {
                 document.getElementById("growthStage")
                     .value;
 
-            if (!cropName || !farm || !plantingDate) {
+            if (!cropName || !farm || !plantingDate || !expectedHarvestDate || !stage) {
                 alert(
-                    "Please fill in crop name, farm, and planting date."
+                    "Please complete all crop fields."
                 );
 
                 return;
@@ -423,7 +425,7 @@ if (cropForm) {
                 farm: farm,
                 plantingDate: plantingDate,
                 expectedHarvestDate: expectedHarvestDate,
-                stage: stage
+                status: stage
             };
 
             try {

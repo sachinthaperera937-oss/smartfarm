@@ -13,7 +13,8 @@ const createCrop = async (req, res) => {
             farm,
             plantingDate,
             expectedHarvestDate,
-            status
+            status,
+            stage
         } = req.body;
 
         // Validate required fields
@@ -49,7 +50,7 @@ const createCrop = async (req, res) => {
             farm,
             plantingDate,
             expectedHarvestDate,
-            status: status || "planned"
+            status: status || stage || "planned"
         });
 
         return res.status(201).json({
