@@ -429,6 +429,9 @@ if (cropForm) {
             };
 
             try {
+                if (!token) {
+                    throw new Error("Please sign in again before adding a crop.");
+                }
                 const response = await fetch(
                     `${API_URL}/crops`,
                     {
@@ -452,6 +455,9 @@ if (cropForm) {
                     );
                 }
 
+                if (!data.crop || !data.crop._id) {
+                    throw new Error("The server did not confirm that the crop was saved.");
+                }
                 alert("Crop added successfully!");
 
                 closeCropModal();
